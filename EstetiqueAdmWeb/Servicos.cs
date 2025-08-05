@@ -132,5 +132,10 @@ namespace EstetiqueAdmWeb
             txtUrl.Clear();
             pictureBoxImagem.Image = null;
         }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

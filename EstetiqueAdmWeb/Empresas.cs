@@ -20,32 +20,23 @@ namespace EstetiqueAdmWeb
 
 
         private void CarregarEmpresas()
-
         {
-
-            using (MySqlConnection conn = db.GetConnection())
-
+            using (MySqlConnection conn = new MySqlConnection(connStr))
             {
-
                 conn.Open();
 
                 string query = "SELECT * FROM empresas";
-
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
 
                 DataTable dt = new DataTable();
-
                 adapter.Fill(dt);
 
                 dataGridViewEmpresas.DataSource = dt;
-
                 dataGridViewEmpresas.Columns["id"].Visible = false;
-
             }
-
         }
+
 
 
         public Empresas()
@@ -116,6 +107,11 @@ namespace EstetiqueAdmWeb
             {
                 MessageBox.Show("Selecione uma empresa para excluir.");
             }
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

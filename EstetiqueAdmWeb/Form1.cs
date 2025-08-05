@@ -23,46 +23,43 @@ namespace EstetiqueAdmWeb
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string email = txtEmail.Text.Trim();
-            string senha = txtSenha.Text.Trim();
+            
 
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
-                try
-                {
-                    conn.Open();
-                    string query = "SELECT * FROM usuarios WHERE email = @email AND senha = @senha";
-
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@senha", senha);
-
-                    MySqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        string nome = reader["nome"].ToString();
-                        int tipo = Convert.ToInt32(reader["id_tipo_usuario"]);
-
-                        MessageBox.Show($"Bem-vindo, {nome}!");
-
-                        // Abre a tela principal
-                        Form1 telaPrincipal = new Form1();
-                        telaPrincipal.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        lblMensagem.Text = "Email ou senha inválidos.";
-                    }
-
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro ao conectar: " + ex.Message);
-                }
+               
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Usuarios formUsuarios = new Usuarios();
+            formUsuarios.Show();
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            Empresas formUsuarios = new Empresas();
+            formUsuarios.Show();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Servicos formUsuarios = new Servicos();
+            formUsuarios.Show();
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            Application.Exit(); 
         }
     }
     

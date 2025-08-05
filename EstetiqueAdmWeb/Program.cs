@@ -16,7 +16,7 @@ namespace EstetiqueAdmWeb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Empresas());
+            Application.Run(new Form1());
         }
     }
 }
