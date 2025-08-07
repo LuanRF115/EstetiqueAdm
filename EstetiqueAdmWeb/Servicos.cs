@@ -71,6 +71,14 @@ namespace EstetiqueAdmWeb
                 using (MySqlConnection conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
+
+                    // Excluir agendamentos relacionados
+                    string sqlAgendamentos = "DELETE FROM agendamentos WHERE servico_id = @id";
+                    MySqlCommand cmdAg = new MySqlCommand(sqlAgendamentos, conn);
+                    cmdAg.Parameters.AddWithValue("@id", txtId.Text);
+                    cmdAg.ExecuteNonQuery();
+
+                    // Excluir o serviço
                     string sql = "DELETE FROM servicos WHERE id = @id";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id", txtId.Text);
@@ -78,8 +86,9 @@ namespace EstetiqueAdmWeb
                 }
 
                 LimparCampos();
-                MessageBox.Show("Serviço excluído.");
-            }  
+                MessageBox.Show("Serviço excluído com sucesso!");
+            }
+
         }
 
         private void txtUrl_TextChanged(object sender, EventArgs e)

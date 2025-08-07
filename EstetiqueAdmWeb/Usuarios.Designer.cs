@@ -77,7 +77,7 @@
             this.btnExcluir.BackColor = System.Drawing.Color.Purple;
             this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcluir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnExcluir.Location = new System.Drawing.Point(495, 348);
+            this.btnExcluir.Location = new System.Drawing.Point(491, 348);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(159, 56);
             this.btnExcluir.TabIndex = 6;

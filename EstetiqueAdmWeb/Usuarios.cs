@@ -15,6 +15,8 @@ namespace EstetiqueAdmWeb
     {
         string connStr = "SERVER=localhost;DATABASE=bd_estetique;UID=root;PASSWORD=" +
             ";";
+        private object dataGridViewEmpresas;
+
         public Usuarios()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace EstetiqueAdmWeb
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 dataGridViewUsuarios.DataSource = dt;
-                dataGridViewUsuarios.Columns["id"].Visible = false; // Oculta o ID
+                dataGridViewUsuarios.Columns["id"].Visible = false; 
             }
         }
         private void Usuarios_Load(object sender, EventArgs e)
@@ -85,7 +87,8 @@ namespace EstetiqueAdmWeb
         {
             if (dataGridViewUsuarios.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(dataGridViewUsuarios.SelectedRows[0].Cells["id"].Value);
+                var row = dataGridViewUsuarios.SelectedRows[0];
+                int id = Convert.ToInt32(row.Cells["id"].Value);
 
                 DialogResult confirm = MessageBox.Show("Deseja excluir este usuário?", "Confirmação", MessageBoxButtons.YesNo);
                 if (confirm == DialogResult.Yes)
@@ -93,19 +96,27 @@ namespace EstetiqueAdmWeb
                     using (MySqlConnection conn = new MySqlConnection(connStr))
                     {
                         conn.Open();
-                        string sql = "DELETE FROM usuarios WHERE id = @id";
-                        MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                        
+                        string deleteAgendamentos = "DELETE FROM agendamentos WHERE consumidor_id = @id";
+                        MySqlCommand cmdAg = new MySqlCommand(deleteAgendamentos, conn);
+                        cmdAg.Parameters.AddWithValue("@id", id);
+                        cmdAg.ExecuteNonQuery();
+
+                        
+                        string deleteUsuario = "DELETE FROM usuarios WHERE id = @id";
+                        MySqlCommand cmd = new MySqlCommand(deleteUsuario, conn);
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.ExecuteNonQuery();
                     }
 
-                    MessageBox.Show("Usuário excluído com sucesso!");
+                    MessageBox.Show("Usuário excluído.");
                     CarregarUsuarios();
                 }
             }
             else
             {
-                MessageBox.Show("Selecione uma linha para excluir.");
+                MessageBox.Show("Selecione um usuário para excluir.");
             }
         }
 
