@@ -44,16 +44,6 @@ namespace EstetiqueAdmWeb
                         txtPreco.Text = reader["preco"].ToString();
                         txtCategoria.Text = reader["categoria"].ToString();
                         txtEmpresaId.Text = reader["empresa_id"].ToString();
-                        txtUrl.Text = reader["imagem_url"].ToString();
-
-                        try
-                        {
-                            pictureBoxImagem.Load(txtUrl.Text);
-                        }
-                        catch
-                        {
-                            pictureBoxImagem.Image = null;
-                        }
                     }
                     else
                     {
@@ -62,6 +52,7 @@ namespace EstetiqueAdmWeb
                 }
             }
         }
+        
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
@@ -93,14 +84,7 @@ namespace EstetiqueAdmWeb
 
         private void txtUrl_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                pictureBoxImagem.Load(txtUrl.Text);
-            }
-            catch
-            {
-                pictureBoxImagem.Image = null;
-            }
+            
 
 
         }
@@ -112,7 +96,7 @@ namespace EstetiqueAdmWeb
                 conn.Open();
                 string sql = @"UPDATE servicos 
                                SET nome_servico = @nome, descricao = @descricao, preco = @preco, 
-                                   categoria = @categoria, empresa_id = @empresa_id, imagem_url = @imagem 
+                                   categoria = @categoria, empresa_id = @empresa_id
                                WHERE id = @id";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -121,13 +105,13 @@ namespace EstetiqueAdmWeb
                 cmd.Parameters.AddWithValue("@preco", txtPreco.Text);
                 cmd.Parameters.AddWithValue("@categoria", txtCategoria.Text);
                 cmd.Parameters.AddWithValue("@empresa_id", txtEmpresaId.Text);
-                cmd.Parameters.AddWithValue("@imagem", txtUrl.Text);
                 cmd.Parameters.AddWithValue("@id", txtId.Text);
 
                 cmd.ExecuteNonQuery();
             }
 
             MessageBox.Show("Serviço atualizado com sucesso!");
+
         }
 
         private void LimparCampos()
@@ -138,8 +122,6 @@ namespace EstetiqueAdmWeb
             txtPreco.Clear();
             txtCategoria.Clear();
             txtEmpresaId.Clear();
-            txtUrl.Clear();
-            pictureBoxImagem.Image = null;
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)
@@ -148,6 +130,11 @@ namespace EstetiqueAdmWeb
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }

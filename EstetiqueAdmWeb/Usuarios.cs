@@ -15,7 +15,7 @@ namespace EstetiqueAdmWeb
     {
         string connStr = "SERVER=localhost;DATABASE=bd_estetique;UID=root;PASSWORD=" +
             ";";
-        private object dataGridViewEmpresas;
+
 
         public Usuarios()
         {
